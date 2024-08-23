@@ -7,8 +7,8 @@ c = conn.cursor()
 
 app = Flask(__name__)
 
-@app.route("/info", methods=["GET"])
-def get_info():
+@app.route("/management", methods=["GET"])
+def get_management():
     c.execute('select * from register')
     info = c.fetchall()
     machines = []
@@ -21,6 +21,25 @@ def set_machine():
     request_data = request.get_json()
     try:
         c.execute("insert into register (machine_id, machine_name) values ('"+ request_data['machine_id']+"', '"+request_data['machine_name']+"')")
+        conn.commit()
+        return {'result':'success'}
+    except:
+        return {'result':'failed'}
+
+@app.route("/online", methods=["GET"])
+def get_online():
+    c.execute('select * from activate')
+    info = c.fetchall()
+    machines = []
+    for machine in info:
+        machines.append({'machine_id':machine[1], 'machine_name':machine[2], 'ip':machine[3]})
+    return {'result':machines}
+
+@app.route("/activate", methods=["POST"])
+def set_activate():
+    request_data = request.get_json()
+    try:
+        c.execute("insert into activate (machine_id, machine_name, ip) values ('"+ request_data['machine_id']+"', '"+request_data['machine_name']+"', '"+request_data['ip']+"')")
         conn.commit()
         return {'result':'success'}
     except:
