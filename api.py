@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/info", methods=["GET"])
 def get_info():
     c.execute('select * from register')
-    info = c.fetchall()[0]
+    info = c.fetchall()
     machines = []
     for machine in info:
         machines.append({'machine_id':machine[1], 'machine_name':machine[2]})
