@@ -10,8 +10,11 @@ app = Flask(__name__)
 @app.route("/info", methods=["GET"])
 def get_info():
     c.execute('select * from register')
-    info = c.fetchall()
-    return {'result':info}
+    info = c.fetchall()[0]
+    machines = []
+    for machine in info:
+        machines.append({'machine_id':machine[1], 'machine_name':machine[2]})
+    return {'result':machines}
 
 @app.route("/register", methods=["POST"])
 def set_machine():
