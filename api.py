@@ -45,6 +45,16 @@ def set_activate():
     except:
         return {'result':'failed'}
 
+@app.route("/disactivate", methods=["POST"])
+def set_activate():
+    request_data = request.get_json()
+    try:
+        c.execute("delete from activate where machine_id='"+request_data['machine_id']+"'")
+        conn.commit()
+        return {'result':'success'}
+    except:
+        return {'result':'failed'}
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
