@@ -46,7 +46,7 @@ def set_activate():
         return {'result':'failed'}
 
 @app.route("/disactivate", methods=["POST"])
-def set_activate():
+def set_disactivate():
     request_data = request.get_json()
     try:
         c.execute("delete from activate where machine_id='"+request_data['machine_id']+"'")
