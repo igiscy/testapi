@@ -39,7 +39,7 @@ def get_online():
 def set_activate():
     request_data = request.get_json()
     try:
-        c.execute("insert into activate (machine_id, machine_name, ip) values ('"+ request_data['machine_id']+"', '"+request_data['ip']+"')")
+        c.execute("insert into activate (machine_id, ip) values ('"+ request_data['machine_id']+"', '"+request_data['ip']+"')")
         conn.commit()
         return {'result':'success'}
     except:
