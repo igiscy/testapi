@@ -16,9 +16,12 @@ def get_info():
 @app.route("/register", methods=["POST"])
 def set_machine():
     request_data = request.get_json()
-    #c.execute('insert into register values ('+ request_data['machine_id']+', '+request_data['machine_name']+')')
-    #conn.commit()
-    return {'result':request_data}
+    try:
+        c.execute('insert into register (machine_id, machine_name)values ('+ request_data['machine_id']+', '+request_data['machine_name']+')')
+        conn.commit()
+        return {'result':'success'}
+    except:
+        return {'result':'failed'}
 
 
 if __name__ == "__main__":
