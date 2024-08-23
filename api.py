@@ -17,11 +17,11 @@ def get_info():
 def set_machine():
     request_data = request.get_json()
     try:
-        c.execute('insert into register (machine_id, machine_name)values ('+ request_data['machine_id']+', '+request_data['machine_name']+')')
+        c.execute('insert into register (machine_id, machine_name) values ('+ request_data['machine_id']+', '+request_data['machine_name']+')')
         conn.commit()
         return {'result':'success'}
     except:
-        return {'result':'failed'}
+        return {'result':'insert into register (machine_id, machine_name) values ('+ request_data['machine_id']+', '+request_data['machine_name']+')'}
 
 
 if __name__ == "__main__":
